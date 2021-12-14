@@ -7,5 +7,7 @@ import com.topcoder.trains.demo.model.Train;
 
 public interface TrainRepository  extends JpaRepository<Train, Long>{
 	List<Train> findByName(String name);
+	List<Train> findBySharingTracks(boolean sharingTracks);
+	List<Train> findByAmenitiesContaining(String amenities);
 
 }

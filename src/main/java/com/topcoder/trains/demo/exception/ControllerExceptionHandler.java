@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
 
-import  com.topcoder.trains.demo.exception.ErrorMessage;
+/*import  com.topcoder.trains.demo.exception.ErrorMessage;
 import  com.topcoder.trains.demo.exception.ResourceNotFoundException;
 import  com.topcoder.trains.demo.exception.InvalidRequestException;
-import java.util.Date;
+import java.util.Date;*/
 
 @ControllerAdvice
 public class ControllerExceptionHandler {
@@ -47,5 +47,16 @@ public class ControllerExceptionHandler {
 			// request.getDescription(false)
 		);
 		return new ResponseEntity<ErrorMessage>(message, HttpStatus.METHOD_NOT_ALLOWED);
+	}
+	
+	@ExceptionHandler(EmptyMessageException.class)
+	public ResponseEntity<ErrorMessage> okSimpleMessage(EmptyMessageException emexcp) {
+		ErrorMessage message = new ErrorMessage(
+			HttpStatus.OK.value(),
+			// new Date(),
+			emexcp.getMessage()
+			// request.getDescription(false)
+		);
+		return new ResponseEntity<ErrorMessage>(message, HttpStatus.OK);
 	}
 }
